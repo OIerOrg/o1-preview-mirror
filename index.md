@@ -14,8 +14,8 @@ o1 系列模型的推出，标志着 AI 技术在模拟人类思考方面迈出�
 
 ## Links
 
-[AI 高考满分](https://github.com/OIerOrg/Netdisk/blob/main/Picture202410071731145.png) 
-[辅助编写的题解](https://www.luogu.com/article/kat31zj8)
-[加入 QQ 群以获得密匙: 829674074](https://qm.qq.com/q/DlWouhmpDa) 
-[解密](Decrypt.html) 
-[免费使用](https://plus.aivvm.com/auth/login_share?token=fk-aod3xJUcc_v9NfP4eD8_oQbPS25Pko0pu4VV6i0WF2E) 
+- [AI 高考满分](https://github.com/OIerOrg/Netdisk/blob/main/Picture202410071731145.png) 
+- [辅助编写的题解](https://www.luogu.com/article/kat31zj8)
+- [加入 QQ 群以获得密匙: 829674074](https://qm.qq.com/q/DlWouhmpDa) 
+- [解密](Decrypt.html) 
+- [免费使用](https://plus.aivvm.com/auth/login_share?token=fk-aod3xJUcc_v9NfP4eD8_oQbPS25Pko0pu4VV6i0WF2E) 
