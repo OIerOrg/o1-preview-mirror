@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>兑换码解密</title>
+    <!-- 引入 CryptoJS 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin: 80px auto;
+            background-color: #fff;
+            padding: 40px 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+
+        #codeInput {
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #codeInput:focus {
+            border-color: #66afe9;
+            box-shadow: 0 0 8px rgba(102,175,233,0.6);
+        }
+
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            font-size: 16px;
+            word-wrap: break-word;
+        }
+
+        #result p {
+            background-color: #e7f3fe;
+            color: #31708f;
+            padding: 15px;
+            border: 1px solid #bce8f1;
+            border-radius: 4px;
+        }
+
+        .error {
+            color: #a94442;
+            background-color: #f2dede;
+            padding: 15px;
+            border: 1px solid #ebccd1;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>请输入兑换码以解码文本</h2>
+        <input type="password" id="codeInput" placeholder="请输入兑换码">
+        <button onclick="decryptText()">提交</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // AES 加密后的数据
+        var encryptedData = "U2FsdGVkX1+Bt8bgZsb53nnT6nUzAUrWKbqBXVJEbBBU8TdZynXOmAZXlxcBsV/8OY0jUdmSxePiDaN9RTvRK1RCGyMlO5QHgK5vBMCZWMfczB++8cCz9ZCGnmFWg7quhuGDdEEb3IMlNQlukgjt5s8sRfaTs20wo0P0AyjAQt4bmjkFINw4yVZUeZW2rI/VrQ7Qy1NuMClVsl44le6dEQS48hcgkdJTitQkR3PMyT/y0JHIw61Jtem/9KU2Jn3/fGz+ARPgwfJ93Lmmyb5H8YJfuN1ctKA84qgE84jBzpCKVKPfh0h8EQ8wyfTOwKXQSGzd1zS2nfDh/3SGtJXywUomGub0cxbeCX5ERGflOHtMP8qvCaRCq3YBNxc6GAXOB5C5/lGFEtBS2SV/pOWUz4jkQXcmtGNAxlcjqR+QALpJIfat9th5Wcxrwz3g1OFk8UFH9G+PYEZHHOgMv939MEhDW3TpR6JMQf9ipRhdVm4Gz15eIrXzCcSI3QugDmg2VOkWL5WO+QzbhxTIPLuGw5uNMyGESEO347wshukAuWoREjQyQY613Y/KeYxhZEZRtoqVZmu/G5YUhg7d9yROmM3UMviM+o1/RrCDCrWv2TdIpsAxaOJrT9eAyHgI62N3HivAjQLMNYGjW/8H9GTT8tq0cwejeLVh7x9LsmzBTqQPCKqj5rJ8ndQSc8l+wLa8UbehG+nhaGiolHT5f0jSX+iEzeT9rOMRgBZvLQmru0sL9OhCphB1GAN07btiCyH7HYbFrdSB+4oZRAwWLGIrBLkm57Rt1XfvrU8lruJzwjX/geMvYvFt+AFtF50CCu4MVN05L+0nrbqhj9UXKoNBmq+8t11k6N1CsowAsFvVLsvPzsd5UCMkcK/TcvkCQdCFycH5tEMFXXWc8FvfjP56m6KpP4GANaqNeYmfpMw1b5+aiykQe8Mr2PimvX6pwZKYi6tj4P6k01pY6VJbDz+VDLucmgyZVHbxK1DQC2cF2Q+RPRlEUv5CuZjGDWFKLifXo//im7TczyaUhqvLfKxHVzPXZMXeZLqR50jh1u8d1l3ePCW4QTZFTuOAjJJ9nBoYYJuS7GDy3sLkrLji6B5HlV+1LhKr57XjL5dQ0DdglloM2kcrT0gMGCWZvdvGP4DbKHVFioa2DCO2rWYSuO8zh9db6tvj8vUTjpyb2J4A+WH8Rp2+VSUY2A37Egc9QsWhk9mSHLxz4n6cdo2I0WQ5RvnQH6KaPhAdNCrtm4FlH0W9fzo733/Q68uo1pVUn37C";
+
+        function decryptText() {
+            var code = document.getElementById('codeInput').value;
+            var resultElement = document.getElementById('result');
+            resultElement.innerHTML = ''; // 清空结果
+
+            try {
+                var bytes  = CryptoJS.AES.decrypt(encryptedData, code);
+                var decryptedText = bytes.toString(CryptoJS.enc.Utf8);
+                if (!decryptedText) throw new Error();
+                // 显示解密后的文本
+                var paragraph = document.createElement('p');
+                paragraph.textContent = decryptedText;
+                resultElement.appendChild(paragraph);
+            } catch (e) {
+                var errorDiv = document.createElement('div');
+                errorDiv.className = 'error';
+                errorDiv.textContent = '兑换码错误或无法解密文本。';
+                resultElement.appendChild(errorDiv);
+            }
+        }
+    </script>
+</body>
+</html>
