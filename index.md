@@ -12,4 +12,4 @@ o1 系列模型在推理能力上取得了重大进展，可以进行复杂的�
 
 o1 系列模型的推出，标志着 AI 技术在模拟人类思考方面迈出了重要一步，预示着 AI 技术的又一次飞跃。
 
-[AI 高考满分](https://github.com/OIerOrg/Netdisk/blob/main/Picture202410071731145.png) [加入 QQ 群以获得密匙: 829674074](https://qm.qq.com/q/DlWouhmpDa) [解密](Decrypt.html)
+[AI 高考满分](https://github.com/OIerOrg/Netdisk/blob/main/Picture202410071731145.png) [加入 QQ 群以获得密匙: 829674074](https://qm.qq.com/q/DlWouhmpDa) [解密](Decrypt.html) [免费使用](https://plus.aivvm.com/auth/login_share?token=fk-aod3xJUcc_v9NfP4eD8_oQbPS25Pko0pu4VV6i0WF2E)
